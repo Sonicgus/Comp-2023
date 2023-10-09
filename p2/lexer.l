@@ -34,6 +34,7 @@ strlit      \"(\[fnrt\"])\"
 <COMENTARIO>{newline}        {ADDLIN;}
 <COMENTARIO><<EOF>>             {return 0;}
 <COMENTARIO>.            {BEGIN COMENTARIO;}
+strlit              {printf("STRLIT(%s)\n",yytext);}
 
 <<EOF>>                                          {return 0;}
 .                                                {printf("Line %d, column %d: unrecognized character (%s)\n", lin, col, yytext);}
