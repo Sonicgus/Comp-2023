@@ -7,9 +7,9 @@ extern char *yytext;
 
 %token NATURAL IF THEN ELSE
 
+%left IF THEN ELSE
 %left '+' '-'
 %left '*' '/'
-%nonassoc '(' ')'
 
 %%
 
@@ -26,6 +26,7 @@ expression: NATURAL                     { $$ = $1; }
           | expression '*' expression   { $$ = $1 * $3; }
           | expression '/' expression   { $$ = $1 / $3; }
           | '(' expression ')'          { $$ = $2; }
+          | IF expression THEN expression ELSE expression { if ($2) {$$=$4;} else {$$=$6;} }
           ;
 
 %%
